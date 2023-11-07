@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <title>Server IP Address</title>
+</head>
+<body>
+<h1>Server IP Address</h1>
+<p id="serverIP">Loading...</p>
+
+<script>
+    async function fetchServerIP() {
+        try {
+            const response = await fetch('http://localhost:8081/api/server-ip');
+            if (response.ok) {
+                const data = await response.text();
+                document.getElementById('serverIP').textContent = `Server IP Address: ${data}`;
+            } else {
+                console.error('Error:', response.statusText);
+                document.getElementById('serverIP').textContent = 'Failed to fetch server IP';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('serverIP').textContent = 'Failed to fetch server IP';
+        }
+    }
+
+    fetchServerIP(); // Call the async function when the page loads.
+</script>
+</body>
+</html>
